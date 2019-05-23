@@ -1,5 +1,7 @@
 {
   "name": "Pidete-admin",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
