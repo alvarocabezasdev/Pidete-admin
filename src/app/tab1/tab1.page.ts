@@ -27,12 +27,13 @@ export class Tab1Page {
     public loadingController: LoadingController,
     public modalController: ModalController,
     public toastController: ToastController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
    ) { }
 
   leerMesa(param){
     console.log(param);
-    this.navCtrl.navigateRoot(["tab2",{mesa:param}]);
+    //(["tab2",{mesa:param}])
+    this.navCtrl.navigateRoot((["tab2",{mesa:param}]));
   }
 
 

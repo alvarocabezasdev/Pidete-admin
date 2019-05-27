@@ -19,6 +19,10 @@
       mesa2: "mesa2",
       mesa3: "mesa3",
       mesa4: "mesa4",
+      cuentaMesa1: "cuentaMesa1",
+      cuentaMesa2: "cuentaMesa2",
+      cuentaMesa3: "cuentaMesa3",
+      cuentaMesa4: "cuentaMesa4",
 
     }
   };

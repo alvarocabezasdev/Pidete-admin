@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page {
 
@@ -88,26 +88,28 @@ export class Tab2Page {
     toast.present();
   }
 
- 
-  borrarUnidad(producto){
-    console.log(producto);
-  }
-
   totalComanda(){
 
     let total:number = 0;
 
     for (let producto of this.listadoPanel) {
       total = total + producto.precio;
-      this.cantidad = this.cantidad + producto.cantidad;
   }
     return total;
     
 
-  }
+}
 
   getCantidad(){
     return this.cantidad;
+  }
+
+  cerrarMesa(){
+
+    this.servicio.resetCuentaMesa(this.mesa);
+    this.listadoPanel = [];
+    this.servicio.borrarMesa(this.mesa);
+
   }
 
 
