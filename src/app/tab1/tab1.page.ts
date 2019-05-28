@@ -16,6 +16,17 @@ export class Tab1Page {
   listado = [];
   listadoPanel = [];
 
+  cuentaMesa1: any;
+  cuentaMesa2: any;
+  cuentaMesa3: any;
+  cuentaMesa4: any;
+
+  mesa1ocupada: any;
+  mesa2ocupada: any;
+  mesa3ocupada: any;
+  mesa4ocupada: any;
+
+
   mesa = {
     mesa1: "mesa1",
     mesa2: "mesa2",
@@ -28,13 +39,119 @@ export class Tab1Page {
     public modalController: ModalController,
     public toastController: ToastController,
     public navCtrl: NavController,
-   ) { }
+   ) { 
+
+    this.initMesas();
+  }
+
+  ionViewDidEnter(){
+    this.initMesas();
+  }
 
   leerMesa(param){
     console.log(param);
     //(["tab2",{mesa:param}])
-    this.navCtrl.navigateRoot((["tab2",{mesa:param}]));
+    this.navCtrl.navigateRoot((["tabs/tab2",{mesa:param}]));
   }
+
+  initMesas(){
+
+    //GET CUENTA MESA
+    this.servicio.getCuentaMesa(this.mesa.mesa1).get().subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.cuentaMesa1 = this.listado[0].cuenta;
+
+    });   
+
+    this.servicio.getCuentaMesa(this.mesa.mesa2).get().subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.cuentaMesa2 = this.listado[0].cuenta;
+
+    });   
+
+    this.servicio.getCuentaMesa(this.mesa.mesa3).get().subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.cuentaMesa3 = this.listado[0].cuenta;
+
+    });   
+
+    this.servicio.getCuentaMesa(this.mesa.mesa4).get().subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.cuentaMesa4 = this.listado[0].cuenta;
+
+    });
+    
+    //LeerMesas
+    this.servicio.leerMesa(this.mesa.mesa1).subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.mesa1ocupada = this.listado.length;
+
+    });
+
+    this.servicio.leerMesa(this.mesa.mesa2).subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.mesa2ocupada = this.listado.length;
+
+    });
+
+    this.servicio.leerMesa(this.mesa.mesa3).subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.mesa3ocupada = this.listado.length;
+
+    });
+
+    this.servicio.leerMesa(this.mesa.mesa4).subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.mesa4ocupada = this.listado.length;
+
+    });
+
+
+
+
+
+  }
+  
+
+  doRefresh(refresher) {
+    this.initMesas();
+    refresher.target.complete();
+      
+}
+
+
 
 
 

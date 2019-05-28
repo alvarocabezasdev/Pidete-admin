@@ -12,10 +12,9 @@ export class Service {
   productos: AngularFirestoreCollection<any>;
   mesa: AngularFirestoreCollection<any>;
   value: string;
-  cuentaMesa: AngularFirestoreCollection<any>;
+  cuentaMesa:any;
 
-
-
+  cont = 0;
 
   comanda = [];
   listado = [];
@@ -95,6 +94,10 @@ export class Service {
 
   }
 
+
+
+  
+
   //MESA
 
   //CUENTA
@@ -109,40 +112,37 @@ export class Service {
 
     }
 
-    this.cuentaMesa.get().subscribe((querySnapshot) => {
-      this.listado = [];
-      querySnapshot.forEach((doc) => {
-        this.listado.push({ id: doc.id, ...doc.data() });
-      });
-      return this.listado[0].cuenta;
+    return this.cuentaMesa;
 
-    });
   }
 
 
   resetCuentaMesa(mesa){
 
-    let cuenta = {
-      cuenta: false,
-    }
-
     switch(mesa){
       case "mesa1": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa1);break;
       case "mesa2": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa2);break;
       case "mesa3": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa3);break;
-      case "mesa3": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa4);break;
+      case "mesa4": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa4);break;
 
+    }
+
+    let cuenta = {
+      cuenta: false,
     }
 
     this.cuentaMesa.get().subscribe((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         
-        this.mesa.doc(doc.id).update(cuenta);
+        this.cuentaMesa.doc(doc.id).update(cuenta);
       
       });
 
     });
+
+    
   }
+
 
   //CUENTA
 

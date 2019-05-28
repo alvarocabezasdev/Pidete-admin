@@ -31,7 +31,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     SplashScreen,
     HttpClient,
     HttpClientModule,
-    Storage,
+    
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 
 

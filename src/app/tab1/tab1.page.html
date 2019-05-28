@@ -9,9 +9,14 @@
  
 <ion-content>
 
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arrastra para refrescar" refreshingSpinner="crescent"
+          refreshingText="Cargando...">
+        </ion-refresher-content>
+</ion-refresher>
      
 <div class="cuadricula">
-<ion-card (click)="leerMesa(this.mesa.mesa1)">
+<ion-card (click)="leerMesa(this.mesa.mesa1)" [ngClass]="{'green': (this.cuentaMesa1)}" *ngIf="this.mesa1ocupada">
 <div class="card">
 
   <div class="imagen">
@@ -19,16 +24,17 @@
   </div>
 
   <div class="descripcion">
-
+<!--"-->
   <div class="producto">
     <strong><h2>Mesa 1</h2></strong>
   </div>
+
 
 </div>
 </div>
 </ion-card>
 
-<ion-card (click)="leerMesa(this.mesa.mesa2)">
+<ion-card (click)="leerMesa(this.mesa.mesa2)" [ngClass]="{'verde': (this.cuentaMesa2)}" *ngIf="this.mesa2ocupada">
 <div class="card">
 
   <div class="imagen">
@@ -45,7 +51,7 @@
 </div>
 </ion-card>
 
-<ion-card (click)="leerMesa(this.mesa.mesa3)">
+<ion-card (click)="leerMesa(this.mesa.mesa3)" [ngClass]="{'green': (this.cuentaMesa3)}" *ngIf="this.mesa3ocupada">
 <div class="card">
 
   <div class="imagen">
@@ -62,7 +68,7 @@
 </div>
 </ion-card>
 
-<ion-card (click)="leerMesa(this.mesa.mesa4)">
+<ion-card (click)="leerMesa(this.mesa.mesa4)" [ngClass]="{'green': (this.cuentaMesa4)}" *ngIf="this.mesa4ocupada">
 <div class="card">
 
   <div class="imagen">

@@ -23,6 +23,7 @@ export class Tab2Page {
     public modalController: ModalController,
     public toastController: ToastController,
     public param: NavController,
+    public navController: NavController,
     public route: ActivatedRoute
    
     
@@ -62,22 +63,6 @@ export class Tab2Page {
 
   }
 
-  ionViewDidEnter(){
-
-    this.mesa = this.route.snapshot.paramMap.get('mesa');
-
-
-    this.servicio.leerMesa(this.mesa).subscribe((querySnapshot) => {
-      this.listado = [];
-      querySnapshot.forEach((doc) => {
-        this.listado.push({ id: doc.id, ...doc.data() });
-      });
-
-      this.listadoPanel = this.listado;
-
-    });
-
-  }
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -109,6 +94,7 @@ export class Tab2Page {
     this.servicio.resetCuentaMesa(this.mesa);
     this.listadoPanel = [];
     this.servicio.borrarMesa(this.mesa);
+    this.navController.navigateRoot("tabs/tab1");
 
   }
 
