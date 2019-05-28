@@ -12,9 +12,10 @@ export class Service {
   productos: AngularFirestoreCollection<any>;
   mesa: AngularFirestoreCollection<any>;
   value: string;
-  cuentaMesa:any;
+  cuentaMesa: AngularFirestoreCollection<any>;
 
-  cont = 0;
+
+
 
   comanda = [];
   listado = [];
@@ -94,13 +95,10 @@ export class Service {
 
   }
 
-
-
-  
-
   //MESA
 
   //CUENTA
+
 
   getCuentaMesa(mesa){
 
@@ -112,9 +110,10 @@ export class Service {
 
     }
 
-    return this.cuentaMesa;
+    return this.cuentaMesa.get();
 
-  }
+}
+
 
 
   resetCuentaMesa(mesa){
@@ -135,14 +134,12 @@ export class Service {
       querySnapshot.forEach((doc) => {
         
         this.cuentaMesa.doc(doc.id).update(cuenta);
+
       
       });
 
-    });
-
-    
+});
   }
-
 
   //CUENTA
 

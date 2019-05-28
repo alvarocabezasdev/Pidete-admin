@@ -23,8 +23,8 @@ export class Tab2Page {
     public modalController: ModalController,
     public toastController: ToastController,
     public param: NavController,
-    public navController: NavController,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public navController: NavController
    
     
    ) {
@@ -43,6 +43,7 @@ export class Tab2Page {
       this.listadoPanel = this.listado;
 
     });
+
    
    }
 
@@ -63,12 +64,28 @@ export class Tab2Page {
 
   }
 
+  ionViewDidEnter(){
+
+    this.mesa = this.route.snapshot.paramMap.get('mesa');
+
+
+    this.servicio.leerMesa(this.mesa).subscribe((querySnapshot) => {
+      this.listado = [];
+      querySnapshot.forEach((doc) => {
+        this.listado.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.listadoPanel = this.listado;
+
+    });
+
+  }
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Producto añadido',
-      duration: 2000,
-      position: 'bottom',
+      message: 'Mesa cerrada',
+      duration: 1000,
+      position: 'top',
     });
     toast.present();
   }
@@ -90,10 +107,11 @@ export class Tab2Page {
   }
 
   cerrarMesa(){
-
+    console.log(this.mesa);
     this.servicio.resetCuentaMesa(this.mesa);
     this.listadoPanel = [];
     this.servicio.borrarMesa(this.mesa);
+    this.presentToast();
     this.navController.navigateRoot("tabs/tab1");
 
   }

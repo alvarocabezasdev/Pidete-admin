@@ -57,7 +57,7 @@ export class Tab1Page {
   initMesas(){
 
     //GET CUENTA MESA
-    this.servicio.getCuentaMesa(this.mesa.mesa1).get().subscribe((querySnapshot) => {
+    this.servicio.getCuentaMesa(this.mesa.mesa1).subscribe((querySnapshot) => {
       this.listado = [];
       querySnapshot.forEach((doc) => {
         this.listado.push({ id: doc.id, ...doc.data() });
@@ -67,7 +67,7 @@ export class Tab1Page {
 
     });   
 
-    this.servicio.getCuentaMesa(this.mesa.mesa2).get().subscribe((querySnapshot) => {
+    this.servicio.getCuentaMesa(this.mesa.mesa2).subscribe((querySnapshot) => {
       this.listado = [];
       querySnapshot.forEach((doc) => {
         this.listado.push({ id: doc.id, ...doc.data() });
@@ -77,7 +77,7 @@ export class Tab1Page {
 
     });   
 
-    this.servicio.getCuentaMesa(this.mesa.mesa3).get().subscribe((querySnapshot) => {
+    this.servicio.getCuentaMesa(this.mesa.mesa3).subscribe((querySnapshot) => {
       this.listado = [];
       querySnapshot.forEach((doc) => {
         this.listado.push({ id: doc.id, ...doc.data() });
@@ -87,7 +87,7 @@ export class Tab1Page {
 
     });   
 
-    this.servicio.getCuentaMesa(this.mesa.mesa4).get().subscribe((querySnapshot) => {
+    this.servicio.getCuentaMesa(this.mesa.mesa4).subscribe((querySnapshot) => {
       this.listado = [];
       querySnapshot.forEach((doc) => {
         this.listado.push({ id: doc.id, ...doc.data() });
@@ -156,3 +156,6 @@ export class Tab1Page {
 
 
 }
+
+   
+
