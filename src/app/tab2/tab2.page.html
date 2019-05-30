@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Comanda 
+    <ion-title *ngIf="this.mesa">
+      {{this.mesa}}
+    </ion-title>
+    <ion-title *ngIf="!this.mesa">
+      Mesa vacia
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,19 +13,24 @@
 
 <ion-list>
 
-  <ion-item (click)="borrarUnidad(item)" *ngFor="let item of listadoPanel;let i = index">
-
+  <ion-item *ngFor="let item of listadoPanel;let i = index" (click)="productoServido(item)" >
+  
   <div class="producto" col-6>
         <p>{{item.producto}}</p>
   </div>
 
-  <div class="cantidad" col-3>
+  <div class="cantidad" col-3 >
         <p>x<strong>{{item.cantidad}}</strong></p>
   </div>
 
-  <div class="precio" col-3>
+  <div class="precio" col-3 >
         <p>{{item.precio}}€</p>
   </div>
+
+    <div class="tick" *ngIf="item.estado">
+  <ion-img src="./assets/imagenes/checked.png"></ion-img>
+  </div>
+  
   </ion-item>
 
 </ion-list>
@@ -37,7 +45,7 @@
        <div class="total">
       <h2><strong>{{totalComanda()}}€</strong></h2>
     </div>
-    <ion-button class="boton" (click)="cerrarMesa()" [disabled]="!listadoPanel.length">Cerrar mesa</ion-button>
+    <ion-button class="boton" (click)="cerrarMesa()" [disabled]="!this.cuentaMesa">Cerrar mesa</ion-button>
  
     </div>
     </ion-toolbar>

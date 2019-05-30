@@ -11,10 +11,10 @@ export class Service {
 
   productos: AngularFirestoreCollection<any>;
   mesa: AngularFirestoreCollection<any>;
-  value: string;
   cuentaMesa: AngularFirestoreCollection<any>;
+  value: string;
 
-
+  cuenta: any;
 
 
   comanda = [];
@@ -24,9 +24,6 @@ export class Service {
 
   constructor(private fireStore: AngularFirestore,    
     ) {
-
-    this.productos = fireStore.collection<any>(environment.firebaseConfig.productos);
-
 
   }
 
@@ -53,43 +50,71 @@ export class Service {
   //MESA
 
 
-  leerMesa(mesa):  Observable<firebase.firestore.QuerySnapshot> {
+  leerMesa(mesa){
    
     switch(mesa){
       case "mesa1": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa1);break;
       case "mesa2": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa2);break;
       case "mesa3": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa3);break;
-      case "mesa3": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa4);break;
+      case "mesa4": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa4);break;
 
     }
-
-    console.log(this.mesa.get());
 
     return this.mesa.get();
 
   }
 
-  borrarMesa(mesa){
+  borrarMesa(mesa,id){
 
     switch(mesa){
       case "mesa1": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa1);break;
       case "mesa2": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa2);break;
       case "mesa3": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa3);break;
-      case "mesa3": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa4);break;
+      case "mesa4": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa4);break;
 
     }
 
-    this.leerMesa(this.mesa).subscribe((querySnapshot) => {
-      this.listado = [];
-      querySnapshot.forEach((doc) => {
-        this.listado.push({ id: doc.id, ...doc.data() });
-      });
 
-      for(let producto of this.listado){
-        this.mesa.doc(producto.id).delete();
+
+    this.mesa.doc(id).delete();
+
+ 
+}
+
+
+  productoServido(mesa, item){
+
+    switch(mesa){
+      case "mesa1": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa1);break;
+      case "mesa2": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa2);break;
+      case "mesa3": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa3);break;
+      case "mesa4": this.mesa = this.fireStore.collection<any>(environment.firebaseConfig.mesa4);break;
+
+    }
+
+    if(item.estado==true){
+
+      let producto = {
+        producto: item.producto,
+        cantidad: item.cantidad,
+        precio: item.precio,
+        estado: false,
+  
       }
+      this.mesa.doc(item.id).update(producto);
 
-    });
+
+    }else{
+      let producto = {
+        producto: item.producto,
+        cantidad: item.cantidad,
+        precio: item.precio,
+        estado: true,
+  
+      }
+      this.mesa.doc(item.id).update(producto);
+
+    }
 
     
 
@@ -106,40 +131,37 @@ export class Service {
       case "mesa1": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa1);break;
       case "mesa2": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa2);break;
       case "mesa3": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa3);break;
-      case "mesa3": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa4);break;
+      case "mesa4": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa4);break;
 
-    }
-
+    }    
+    
     return this.cuentaMesa.get();
 
 }
 
 
 
-  resetCuentaMesa(mesa){
 
-    switch(mesa){
-      case "mesa1": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa1);break;
-      case "mesa2": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa2);break;
-      case "mesa3": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa3);break;
-      case "mesa4": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa4);break;
+resetCuentaMesa(mesa,idMesa){
 
-    }
+  console.log("Resetmesa: "+mesa);
 
-    let cuenta = {
-      cuenta: false,
-    }
-
-    this.cuentaMesa.get().subscribe((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        
-        this.cuentaMesa.doc(doc.id).update(cuenta);
-
-      
-      });
-
-});
+  let cuenta = {
+    cuenta: false,
   }
+
+  switch(mesa){
+    case "mesa1": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa1);break;
+    case "mesa2": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa2);break;
+    case "mesa3": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa3);break;
+    case "mesa4": this.cuentaMesa = this.fireStore.collection<any>(environment.firebaseConfig.cuentaMesa4);break;
+
+  }    
+
+  this.cuentaMesa.doc(idMesa).update(cuenta);
+  
+
+}
 
   //CUENTA
 

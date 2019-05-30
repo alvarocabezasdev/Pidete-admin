@@ -48,9 +48,7 @@ export class Tab1Page {
     this.initMesas();
   }
 
-  leerMesa(param){
-    console.log(param);
-    //(["tab2",{mesa:param}])
+  leerMesa(param){    
     this.navCtrl.navigateRoot((["tabs/tab2",{mesa:param}]));
   }
 
@@ -62,10 +60,10 @@ export class Tab1Page {
       querySnapshot.forEach((doc) => {
         this.listado.push({ id: doc.id, ...doc.data() });
       });
-
       this.cuentaMesa1 = this.listado[0].cuenta;
 
     });   
+
 
     this.servicio.getCuentaMesa(this.mesa.mesa2).subscribe((querySnapshot) => {
       this.listado = [];
@@ -150,6 +148,8 @@ export class Tab1Page {
     refresher.target.complete();
       
 }
+
+
 
 
 
