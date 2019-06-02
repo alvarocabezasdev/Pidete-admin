@@ -29,15 +29,26 @@ export class Service {
 
   //PRODUCTOS
 
+    /**
+   * 
+   * 
+   * @return Observable con el objeto Firestore productos
+   */
   leerListadoProductos(): Observable<firebase.firestore.QuerySnapshot> {
     console.log(this.productos.get());
     return this.productos.get();
   }
 
+   /**
+   * @return Observable con el objeto Firestore productos al añadir un producto
+   */
   agregarRegistro(datos): Promise<firebase.firestore.DocumentReference> {
     return this.productos.add(datos);
   }
 
+   /**
+   * @return Observable con el objeto Firestore productos al borrar un producto
+   */
   borrarRegistro(id): Promise<void>{
     
   return this.productos.doc(id).delete();
@@ -49,7 +60,11 @@ export class Service {
 
   //MESA
 
-
+   /**
+   * @param mesa
+   * @return Observable con el objeto Firestore mesa 
+   * 
+   */
   leerMesa(mesa){
    
     switch(mesa){
@@ -64,6 +79,11 @@ export class Service {
 
   }
 
+     /**
+   * @param mesa
+   * @param id
+   * 
+   */  
   borrarMesa(mesa,id){
 
     switch(mesa){
@@ -81,7 +101,11 @@ export class Service {
  
 }
 
-
+     /**
+   * @param mesa
+   * @param item
+   * 
+   */  
   productoServido(mesa, item){
 
     switch(mesa){
@@ -124,7 +148,11 @@ export class Service {
 
   //CUENTA
 
-
+   /**
+   * @param mesa
+   * @return Observable con el objeto Firestore mesa 
+   * 
+   */
   getCuentaMesa(mesa){
 
     switch(mesa){
@@ -141,7 +169,11 @@ export class Service {
 
 
 
-
+     /**
+   * @param mesa
+   * @param idMesa
+   * 
+   */  
 resetCuentaMesa(mesa,idMesa){
 
   console.log("Resetmesa: "+mesa);

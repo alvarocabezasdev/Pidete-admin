@@ -142,7 +142,10 @@ export class Tab1Page {
 
   }
   
-
+     /**
+   * @param refresher
+   * 
+   */  
   doRefresh(refresher) {
     this.initMesas();
     refresher.target.complete();

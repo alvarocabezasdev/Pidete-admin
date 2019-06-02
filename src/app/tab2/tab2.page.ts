@@ -51,6 +51,10 @@ export class Tab2Page {
     toast.present();
   }
 
+  /**
+   * @return Number con el valor total de la mesa
+   * 
+   */  
   totalComanda(){
 
     let total:number = 0;
@@ -63,6 +67,11 @@ export class Tab2Page {
 
 }
 
+  /**
+   * 
+   * @return Cantidad
+   * 
+   */  
   getCantidad(){
     return this.cantidad;
   }
@@ -86,7 +95,10 @@ export class Tab2Page {
 
   }
 
-
+     /**
+   * @param item
+   * 
+   */  
   productoServido(item){
     this.servicio.productoServido(this.mesa, item);
     this.initMesa();
